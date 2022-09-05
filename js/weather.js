@@ -5,10 +5,8 @@ const loadTemperature = city => {
         .then(res => res.json())
         .then(data => displayTemperaure(data))
 }
-
-
+// display weather
 const displayTemperaure = weather => {
-    console.log(weather)
     const temperatureField = document.getElementById('temperature');
     temperatureField.innerText = weather.main.temp
     // weather set 
@@ -17,71 +15,20 @@ const displayTemperaure = weather => {
     document.getElementById('city-name').innerText = weather.name
 }
 
+// wather search click event handler
 document.getElementById('btn-search').addEventListener('click', function () {
     const city = document.getElementById('btn-field').value;
+    document.getElementById('btn-field').value = '';
     loadTemperature(city)
 })
 
+// wather search enter event handler
+document.getElementById('btn-field').addEventListener('keypress', function (event) {
+    const city = document.getElementById('btn-field').value;
+    document.getElementById('btn-field').value = '';
+    if (event.key === 'Enter') {
+        loadTemperature(city)
+    }
+})
+// by default weather set
 loadTemperature('london')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* const API_KEY = 'd108b993d4517b6c91aa5073dd8e8295'
-
-const loadTemperature = city => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayTemperature(data))
-}
-
-const displayTemperature = data => {
-    const temperatureField = document.getElementById('temperature');
-    temperatureField.innerText = data.main.temp
-    console.log(data.main.temp)
-}
-
-document.getElementById('btn-search').addEventListener('click', function () {
-    const btnField = document.getElementById('btn-field');
-    const city = btnField.value;
-    btnField.value = '';
-
-    document.getElementById('city-name').innerText = city;
-    loadTemperature(city)
-}) */
-
-// loadTemperature('dhaka')
